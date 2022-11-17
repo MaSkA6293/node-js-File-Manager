@@ -1,0 +1,11 @@
+{
+  "name": "nodejs-file-manager",
+  "version": "1.0.0",
+  "description": "https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/file-manager/assignment.md",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "author": "maska6293",
+  "license": "ISC"
+}
