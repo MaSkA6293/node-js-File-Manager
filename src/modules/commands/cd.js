@@ -1,5 +1,4 @@
-import { consoleColors } from './helpers.js';
-import { isCanMoveUp } from './helpers.js';
+import { consoleColors, isCanMoveUp } from '../helpers.js';
 import path from 'path';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: cd path_to_directory`;
@@ -25,7 +24,7 @@ export const cd = (command) => {
       } else {
         console.log(
           consoleColors.red,
-          `Error, you can't go higher than your work directory: ${currentDir}`
+          `Error, you can't go upper from your work directory: ${currentDir}`
         );
       }
       break;

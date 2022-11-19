@@ -1,9 +1,8 @@
 import { stdin } from 'process';
 import { commandSanitize, consoleColors } from './helpers.js';
 import { commandTypes } from './commandTypes.js';
-import path from 'path';
-import * as os from 'os';
-import { cd } from './cd.js';
+import { cd } from './commands/cd.js';
+import { up } from './commands/up.js';
 
 export const manager = () => {
   stdin.on('data', (data) => {
@@ -14,6 +13,10 @@ export const manager = () => {
         cd(command);
         break;
       }
+      case commandTypes.up: {
+        up(command);
+        break;
+      }
       default: {
         console.log(
           consoleColors.red,
@@ -21,29 +24,5 @@ export const manager = () => {
         );
       }
     }
-
-    // if (!command) return;
-
-    // const [type, nextPath] = command;
-
-    // if (!checkType(type, 'cd')) return;
-    // if (!checkMoveUp(nextPath)) return;
-
-    // try {
-    //   const dir = process.cwd().trim();
-    //   const lastFolder = dir.split('/');
-    //   console.log(lastFolder);
-    //   if (lastFolder[lastFolder.length - 1] !== os.userInfo().username) {
-    //     console.log('result', path.join(dir, movePath));
-    //     process.chdir(path.join(dir, movePath));
-    //   }
-
-    //  console.log("Updated working directory is: " + process.cwd());
-    // } catch (err) {
-    //   // Printing error if any occurs
-    //   console.error('error occured while ' + 'changing directory: ' + err);
-    // }
   });
 };
-
-// const checkType = (type, setType) => (type && type === setType ? true : false);
