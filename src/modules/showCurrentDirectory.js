@@ -1,8 +1,10 @@
 import path from 'path';
+import * as os from 'os';
 
-export const showCurrentDirectory = (filename) => {
-  const __dirname = path.dirname(filename);
-  process.chdir(path.join(__dirname));
+export const showCurrentDirectory = () => {
+  const homeDir = os.userInfo().homedir;
+
+  process.chdir(path.join(homeDir));
 
   getMessage();
   process.stdin.on('data', () => {
