@@ -1,4 +1,5 @@
 import { stdout, stdin } from 'process';
+import { consoleColors } from './helpers.js';
 
 export const init = () => {
   const args = process.argv.slice(2);
@@ -11,13 +12,14 @@ export const init = () => {
   });
 
   if (name) {
-    console.log(`Welcome to the File Manager, ${name}!`);
+    console.log(consoleColors.green, `Welcome to the File Manager, ${name}!`);
 
     process
       .on('SIGINT', () => {
         process.exit();
       })
       .on('exit', () => {
+        console.log(consoleColors.green);
         stdout.write(`\nThank you for using File Manager, ${name}, goodbye!\n`);
         process.exit();
       });
@@ -29,6 +31,7 @@ export const init = () => {
     });
   } else {
     console.log(
+      consoleColors.red,
       "Unfortunately, the required parameter --username, wasn't pointed out.\nThe program has been closed.\nGood bye!"
     );
     process.exit();

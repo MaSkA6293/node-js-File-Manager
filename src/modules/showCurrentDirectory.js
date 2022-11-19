@@ -1,5 +1,6 @@
 import path from 'path';
 import * as os from 'os';
+import { consoleColors } from './helpers.js';
 
 export const showCurrentDirectory = () => {
   const homeDir = os.userInfo().homedir;
@@ -13,5 +14,5 @@ export const showCurrentDirectory = () => {
 };
 
 const getMessage = () => {
-  console.log(`You are currently in ${process.cwd()}`);
+  console.log(consoleColors.cyan, `You are currently in ${process.cwd()}`);
 };
