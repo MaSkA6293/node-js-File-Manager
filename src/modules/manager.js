@@ -1,11 +1,15 @@
-import { stdin } from 'process';
-import { commandSanitize, consoleColors } from './helpers.js';
+import {
+  commandSanitize,
+  consoleColors,
+  showCurrentDirectory,
+} from './helpers.js';
 import { commandTypes } from './commandTypes.js';
 import { cd } from './commands/cd.js';
 import { up } from './commands/up.js';
+import { ls } from './commands/ls.js';
 
 export const manager = () => {
-  stdin.on('data', (data) => {
+  process.stdin.on('data', async (data) => {
     const command = commandSanitize(data);
 
     switch (command[0]) {
@@ -17,6 +21,10 @@ export const manager = () => {
         up(command);
         break;
       }
+      case commandTypes.ls: {
+        await ls(command);
+        break;
+      }
       default: {
         console.log(
           consoleColors.red,
@@ -24,5 +32,6 @@ export const manager = () => {
         );
       }
     }
+    showCurrentDirectory();
   });
 };

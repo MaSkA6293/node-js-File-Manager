@@ -1,5 +1,9 @@
 import { stdout, stdin } from 'process';
-import { consoleColors } from './helpers.js';
+import {
+  consoleColors,
+  setWorkDirectory,
+  showCurrentDirectory,
+} from './helpers.js';
 
 export const init = () => {
   const args = process.argv.slice(2);
@@ -29,6 +33,9 @@ export const init = () => {
         process.exit();
       }
     });
+
+    setWorkDirectory();
+    showCurrentDirectory();
   } else {
     console.log(
       consoleColors.red,
