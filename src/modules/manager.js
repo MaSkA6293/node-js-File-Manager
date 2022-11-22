@@ -2,8 +2,8 @@ import {
   commandSanitize,
   consoleColors,
   showCurrentDirectory,
+  operationTypes,
 } from './helpers.js';
-import { operationTypes } from './operationTypes.js';
 import * as operations from './operations/index.js';
 
 export const manager = () => {
