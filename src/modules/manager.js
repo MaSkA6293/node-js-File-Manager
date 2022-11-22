@@ -3,7 +3,7 @@ import {
   consoleColors,
   showCurrentDirectory,
 } from './helpers.js';
-import { commandTypes } from './commandTypes.js';
+import { operationTypes } from './operationTypes.js';
 import * as operations from './operations/index.js';
 
 export const manager = () => {
@@ -11,19 +11,19 @@ export const manager = () => {
     const command = commandSanitize(data);
 
     switch (command[0]) {
-      case commandTypes.cd: {
+      case operationTypes.cd: {
         operations.cd(command);
         break;
       }
-      case commandTypes.up: {
+      case operationTypes.up: {
         operations.up(command);
         break;
       }
-      case commandTypes.ls: {
+      case operationTypes.ls: {
         await operations.ls(command);
         break;
       }
-      case commandTypes.cat: {
+      case operationTypes.cat: {
         await operations.cat(command);
         break;
       }
