@@ -1,5 +1,6 @@
 import path from 'path';
 import { userInfo } from 'os';
+import { stat } from 'fs/promises';
 
 export const commandSanitize = (data) => {
   return data
@@ -53,4 +54,23 @@ export const formatData = (data) => {
       Type: el.isFile() ? 'file' : 'directory',
     };
   });
+};
+
+export const checkFileForReadAndPrint = async (path) => {
+  try {
+    const fileStat = await stat(path);
+    if (fileStat.isFile()) return true;
+    console.log(
+      consoleColors.red,
+      `Operation failed. This command is for reading files, you are trying to read a directory`
+    );
+    return false;
+  } catch (e) {
+    if (e && e.code === 'ENOENT') {
+      console.log(consoleColors.red, `No such file or directory, ${path}`);
+    } else {
+      console.log(e);
+    }
+    return false;
+  }
 };

@@ -4,9 +4,7 @@ import {
   showCurrentDirectory,
 } from './helpers.js';
 import { commandTypes } from './commandTypes.js';
-import { cd } from './commands/cd.js';
-import { up } from './commands/up.js';
-import { ls } from './commands/ls.js';
+import * as operations from './operations/index.js';
 
 export const manager = () => {
   process.stdin.on('data', async (data) => {
@@ -14,15 +12,19 @@ export const manager = () => {
 
     switch (command[0]) {
       case commandTypes.cd: {
-        cd(command);
+        operations.cd(command);
         break;
       }
       case commandTypes.up: {
-        up(command);
+        operations.up(command);
         break;
       }
       case commandTypes.ls: {
-        await ls(command);
+        await operations.ls(command);
+        break;
+      }
+      case commandTypes.cat: {
+        await operations.cat(command);
         break;
       }
       default: {
