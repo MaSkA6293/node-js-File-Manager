@@ -31,6 +31,10 @@ export const manager = () => {
         operations.add(command);
         break;
       }
+      case operationTypes.rn: {
+        await operations.rn(command);
+        break;
+      }
       default: {
         console.log(
           consoleColors.red,

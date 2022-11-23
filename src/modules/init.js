@@ -4,6 +4,7 @@ import {
   setWorkDirectory,
   showCurrentDirectory,
 } from './helpers.js';
+import { EOL } from 'os';
 
 export const init = () => {
   const args = process.argv.slice(2);
@@ -16,7 +17,10 @@ export const init = () => {
   });
 
   if (name) {
-    console.log(consoleColors.green, `Welcome to the File Manager, ${name}!`);
+    console.log(
+      consoleColors.green,
+      `Welcome to the File Manager, ${name}! ${EOL}`
+    );
 
     process
       .on('SIGINT', () => {

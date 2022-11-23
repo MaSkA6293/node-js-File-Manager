@@ -3,5 +3,6 @@ import { up } from './up.js';
 import { ls } from './ls.js';
 import { cat } from './cat.js';
 import { add } from './add.js';
+import { rn } from './rn.js';
 
-export { cd, up, ls, cat, add };
+export { cd, up, ls, cat, add, rn };

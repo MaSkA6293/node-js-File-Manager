@@ -1,7 +1,7 @@
 import {
   consoleColors,
   showCurrentDirectory,
-  checkFileForReadAndPrint,
+  checkFileAccess,
 } from '../helpers.js';
 import { createReadStream } from 'fs';
 import path from 'path';
@@ -17,7 +17,7 @@ export const cat = async (command) => {
 
   const pathToFile = path.join(process.cwd(), command[1]);
 
-  if (!(await checkFileForReadAndPrint(pathToFile))) return;
+  if (!(await checkFileAccess(pathToFile))) return;
 
   const readStream = createReadStream(pathToFile);
 
@@ -27,7 +27,6 @@ export const cat = async (command) => {
     })
     .on('end', () => {
       process.stdout.write(EOL);
-      showCurrentDirectory();
     })
     .on('error', (e) => {
       console.log('Operation failed', e);

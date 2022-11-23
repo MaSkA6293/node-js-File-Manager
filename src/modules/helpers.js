@@ -1,5 +1,5 @@
 import path from 'path';
-import { userInfo } from 'os';
+import { userInfo, EOL } from 'os';
 import { stat } from 'fs/promises';
 
 export const commandSanitize = (data) => {
@@ -34,7 +34,11 @@ export const setWorkDirectory = () => {
 export const showCurrentDirectory = () => {
   console.log(
     consoleColors.cyan,
-    `You are currently in ${process.cwd().trim()}`
+    `You are currently in ${process.cwd().trim()}${EOL}`
+  );
+  console.log(
+    consoleColors.cyan,
+    `File manager is ready, please write the command`
   );
   console.log(consoleColors.reset);
 };
@@ -56,13 +60,13 @@ export const formatData = (data) => {
   });
 };
 
-export const checkFileForReadAndPrint = async (path) => {
+export const checkFileAccess = async (path) => {
   try {
     const fileStat = await stat(path);
     if (fileStat.isFile()) return true;
     console.log(
       consoleColors.red,
-      `Operation failed. This command is for reading files, you are trying to read a directory`
+      `Operation failed. You are trying to access a directory`
     );
     return false;
   } catch (e) {

@@ -1,8 +1,4 @@
-import {
-  consoleColors,
-  showCurrentDirectory,
-  checkFileForReadAndPrint,
-} from '../helpers.js';
+import { consoleColors } from '../helpers.js';
 import { writeFile } from 'fs/promises';
 import path from 'path';
 
