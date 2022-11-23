@@ -1,8 +1,4 @@
-import {
-  consoleColors,
-  showCurrentDirectory,
-  checkFileAccess,
-} from '../helpers.js';
+import { consoleColors, checkFileAccess } from '../helpers.js';
 import { createReadStream } from 'fs';
 import path from 'path';
 import { EOL } from 'os';

@@ -1,5 +1,6 @@
 import { consoleColors, formatData } from '../helpers.js';
 import { readdir } from 'fs/promises';
+
 const invalidCommandMessage = `Error, invalid command. Please print command like: ls`;
 
 export const ls = async (command) => {

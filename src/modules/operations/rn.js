@@ -13,7 +13,9 @@ export const rn = async (command) => {
 
   const pathToFile = path.join(process.cwd(), fileName);
   const pathToRenamedFile = path.join(process.cwd(), newFileName);
+
   if (!(await checkFileAccess(pathToFile))) return;
+
   try {
     await rename(pathToFile, pathToRenamedFile);
   } catch (e) {
