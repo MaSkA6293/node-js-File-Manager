@@ -79,6 +79,25 @@ export const checkFileAccess = async (path) => {
   }
 };
 
+export const checkFolderAccess = async (path) => {
+  try {
+    const fileStat = await stat(path);
+    if (!fileStat.isFile()) return true;
+    console.log(
+      consoleColors.red,
+      `Operation failed. You are trying to access a file ${path}`
+    );
+    return false;
+  } catch (e) {
+    if (e && e.code === 'ENOENT') {
+      console.log(consoleColors.red, `No such file or directory, ${path}`);
+    } else {
+      console.log(e);
+    }
+    return false;
+  }
+};
+
 export const operationTypes = {
   up: 'up',
   cd: 'cd',

@@ -3,7 +3,7 @@ import { copyFile, constants } from 'fs/promises';
 import path from 'path';
 import { EOL } from 'os';
 
-const invalidCommandMessage = `Error, invalid command. Please print command like: rcp path_to_file path_to_new_directory`;
+const invalidCommandMessage = `Error, invalid command. Please print command like: cp path_to_file path_to_new_directory`;
 
 export const cp = async (command) => {
   if (command.length !== 3) {
