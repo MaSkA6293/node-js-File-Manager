@@ -7,5 +7,6 @@ import { rn } from './rn.js';
 import { cp } from './cp.js';
 import { mv } from './mv.js';
 import { removeFile } from './rm.js';
+import { os } from './os.js';
 
-export { cd, up, ls, cat, add, rn, cp, mv, removeFile as rm };
+export { cd, up, ls, cat, add, rn, cp, mv, removeFile as rm, os };

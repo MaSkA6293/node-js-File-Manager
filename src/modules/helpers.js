@@ -113,3 +113,23 @@ export const operationTypes = {
   compress: 'compress',
   decompress: 'decompress',
 };
+
+export const argumentsOsCommand = {
+  eol: '--EOL',
+  cpus: '--cpus',
+  homedir: '--homedir',
+  username: '--username',
+  architecture: '--architecture',
+};
+
+export const osCheckArgument = (argument) => {
+  if (argumentsOsCommand.hasOwnProperty(argument.slice(2))) {
+    return true;
+  } else {
+    console.log(
+      consoleColors.red,
+      `Operation failed: wrong argument ${argument}`
+    );
+    return false;
+  }
+};
