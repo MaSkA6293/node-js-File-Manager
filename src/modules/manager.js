@@ -51,6 +51,10 @@ export const manager = () => {
         await operations.os(command);
         break;
       }
+      case operationTypes.hash: {
+        await operations.hash(command);
+        break;
+      }
       default: {
         console.log(
           consoleColors.red,

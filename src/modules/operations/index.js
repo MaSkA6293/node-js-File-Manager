@@ -8,5 +8,6 @@ import { cp } from './cp.js';
 import { mv } from './mv.js';
 import { removeFile } from './rm.js';
 import { os } from './os.js';
+import { hash } from './hash.js';
 
-export { cd, up, ls, cat, add, rn, cp, mv, removeFile as rm, os };
+export { cd, up, ls, cat, add, rn, cp, mv, removeFile as rm, os, hash };
