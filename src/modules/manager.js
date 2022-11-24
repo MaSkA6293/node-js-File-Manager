@@ -28,7 +28,7 @@ export const manager = () => {
         break;
       }
       case operationTypes.add: {
-        operations.add(command);
+        await operations.add(command);
         break;
       }
       case operationTypes.rn: {
@@ -41,6 +41,10 @@ export const manager = () => {
       }
       case operationTypes.mv: {
         await operations.mv(command);
+        break;
+      }
+      case operationTypes.rm: {
+        await operations.rm(command);
         break;
       }
       default: {
