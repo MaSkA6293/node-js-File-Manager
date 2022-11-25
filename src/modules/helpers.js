@@ -133,3 +133,5 @@ export const osCheckArgument = (argument) => {
     return false;
   }
 };
+
+export const brotliPrefix = '.br';

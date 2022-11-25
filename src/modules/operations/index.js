@@ -9,5 +9,21 @@ import { mv } from './mv.js';
 import { removeFile } from './rm.js';
 import { os } from './os.js';
 import { hash } from './hash.js';
+import { compress } from './compress.js';
+import { decompress } from './decompress.js';
 
-export { cd, up, ls, cat, add, rn, cp, mv, removeFile as rm, os, hash };
+export {
+  cd,
+  up,
+  ls,
+  cat,
+  add,
+  rn,
+  cp,
+  mv,
+  removeFile as rm,
+  os,
+  hash,
+  compress,
+  decompress,
+};

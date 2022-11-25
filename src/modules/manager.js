@@ -55,6 +55,14 @@ export const manager = () => {
         await operations.hash(command);
         break;
       }
+      case operationTypes.compress: {
+        await operations.compress(command);
+        break;
+      }
+      case operationTypes.decompress: {
+        await operations.decompress(command);
+        break;
+      }
       default: {
         console.log(
           consoleColors.red,
