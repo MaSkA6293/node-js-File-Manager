@@ -1,4 +1,4 @@
-import path from 'path';
+import { resolve } from 'path';
 import { userInfo, EOL } from 'os';
 import { stat } from 'fs/promises';
 
@@ -28,7 +28,7 @@ export const isCanMoveUp = () => {
 export const setWorkDirectory = () => {
   const homeDir = userInfo().homedir;
 
-  process.chdir(path.join(homeDir));
+  process.chdir(resolve(homeDir));
 };
 
 export const showCurrentDirectory = () => {

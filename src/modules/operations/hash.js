@@ -1,6 +1,6 @@
 import { consoleColors, checkFileAccess } from '../helpers.js';
 import { readFile } from 'fs/promises';
-import path from 'path';
+import { resolve } from 'path';
 import { EOL } from 'os';
 import { createHash } from 'crypto';
 
@@ -13,9 +13,10 @@ export const hash = async (command) => {
   }
   const [_, fileName] = command;
 
-  const pathToFile = path.join(process.cwd(), fileName);
+  const pathToFile = resolve(process.cwd(), fileName);
 
-  if (!(await checkFileAccess(pathToFile))) return;
+  const isFile = await checkFileAccess(pathToFile);
+  if (!isFile) return;
 
   try {
     const file = await readFile(pathToFile);

@@ -1,6 +1,6 @@
 import { consoleColors, checkFileAccess } from '../helpers.js';
 import { rename } from 'fs/promises';
-import path from 'path';
+import { resolve } from 'path';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: rn path_to_file new_filename`;
 
@@ -11,10 +11,11 @@ export const rn = async (command) => {
   }
   const [_, fileName, newFileName] = command;
 
-  const pathToFile = path.join(process.cwd(), fileName);
-  const pathToRenamedFile = path.join(process.cwd(), newFileName);
+  const pathToFile = resolve(process.cwd(), fileName);
+  const pathToRenamedFile = resolve(process.cwd(), newFileName);
 
-  if (!(await checkFileAccess(pathToFile))) return;
+  const isFile = await checkFileAccess(pathToFile);
+  if (!isFile) return;
 
   try {
     await rename(pathToFile, pathToRenamedFile);

@@ -1,4 +1,3 @@
-import { stdout, stdin } from 'process';
 import {
   consoleColors,
   setWorkDirectory,
@@ -28,11 +27,13 @@ export const init = () => {
       })
       .on('exit', () => {
         console.log(consoleColors.green);
-        stdout.write(`\nThank you for using File Manager, ${name}, goodbye!\n`);
+        process.stdout.write(
+          `\nThank you for using File Manager, ${name}, goodbye!\n`
+        );
         process.exit();
       });
 
-    stdin.on('data', (data) => {
+    process.stdin.on('data', (data) => {
       if (data.toString().trim() === '.exit') {
         process.exit();
       }

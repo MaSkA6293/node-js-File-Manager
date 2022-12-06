@@ -4,9 +4,9 @@ import {
   checkFolderAccess,
   brotliPrefix,
 } from '../helpers.js';
-import path from 'path';
+import { resolve } from 'path';
 import { createReadStream, createWriteStream } from 'fs';
-import { createBrotliCompress } from 'node:zlib';
+import { createBrotliCompress } from 'zlib';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: compress path_to_file path_to_destination`;
 
@@ -17,16 +17,19 @@ export const compress = async (command) => {
   }
   const [_, fileName, destination] = command;
 
-  const pathToFile = path.join(process.cwd(), fileName);
-  const pathToCopy = path.join(process.cwd(), destination);
+  const pathToFile = resolve(process.cwd(), fileName);
+  const pathToCopy = resolve(process.cwd(), destination);
 
-  if (!(await checkFileAccess(pathToFile))) return;
-  if (!(await checkFolderAccess(pathToCopy))) return;
+  const isFile = await checkFileAccess(pathToFile);
+  if (!isFile) return;
+
+  const isFolder = await checkFolderAccess(pathToCopy);
+  if (!isFolder) return;
 
   const readStream = createReadStream(pathToFile);
 
   const writeStream = createWriteStream(
-    path.join(pathToCopy, `${fileName}${brotliPrefix}`)
+    resolve(pathToCopy, `${fileName}${brotliPrefix}`)
   );
 
   const brotliAlgorithm = createBrotliCompress();

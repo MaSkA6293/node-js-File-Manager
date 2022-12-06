@@ -4,8 +4,7 @@ import {
   checkFolderAccess,
 } from '../helpers.js';
 import { rm } from 'fs/promises';
-import path from 'path';
-import { EOL } from 'os';
+import { resolve } from 'path';
 import { createReadStream, createWriteStream } from 'fs';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: mv path_to_file path_to_new_directory`;
@@ -17,11 +16,14 @@ export const mv = async (command) => {
   }
   const [_, from, to] = command;
 
-  const pathToFile = path.join(process.cwd(), from);
-  const pathToNewDest = path.join(process.cwd(), to, from);
+  const pathToFile = resolve(process.cwd(), from);
+  const pathToNewDest = resolve(process.cwd(), to, from);
 
-  if (!(await checkFileAccess(pathToFile))) return;
-  if (!(await checkFolderAccess(path.join(process.cwd(), to)))) return;
+  const isFile = await checkFileAccess(pathToFile);
+  if (!isFile) return;
+
+  const isFolder = await checkFolderAccess(resolve(process.cwd(), to));
+  if (!isFolder) return;
 
   const read = createReadStream(pathToFile);
 

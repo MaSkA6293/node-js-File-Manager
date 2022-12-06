@@ -4,7 +4,6 @@ import {
   osCheckArgument,
 } from '../helpers.js';
 import { EOL, cpus, userInfo } from 'os';
-import { stdout, arch } from 'process';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: os --argument`;
 
@@ -19,18 +18,17 @@ export const os = async (command) => {
 
   switch (argument) {
     case argumentsOsCommand.eol: {
-      stdout.write(
+      process.stdout.write(
         `Default system End-Of-Line is ${JSON.stringify(EOL)} ${EOL} ${EOL}`
       );
       break;
     }
 
     case argumentsOsCommand.cpus: {
-      const kernels = cpus();
-      console.log(`${EOL} Amount: ${kernels.length}`);
-      kernels.forEach((el, i) => {
-        console.log(`№${i + 1} model:${el.model}`);
+      const kernels = cpus().map(({ model, speed }) => {
+        return { model, speed: `${speed / 1000} GHz` };
       });
+      console.table(kernels);
       break;
     }
 
@@ -45,7 +43,7 @@ export const os = async (command) => {
     }
 
     case argumentsOsCommand.architecture: {
-      console.log(`${EOL} Architecture: ${arch} ${EOL}`);
+      console.log(`${EOL} Architecture: ${process.arch} ${EOL}`);
       break;
     }
   }

@@ -1,5 +1,5 @@
 import { consoleColors, isCanMoveUp } from '../helpers.js';
-import path from 'path';
+import { resolve } from 'path';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: cd path_to_directory`;
 
@@ -20,7 +20,7 @@ export const cd = (command) => {
   switch (featurePath) {
     case '..': {
       if (isCanMoveUp()) {
-        process.chdir(path.join(currentDir, featurePath));
+        process.chdir(resolve(currentDir, featurePath));
       } else {
         console.log(
           consoleColors.red,
@@ -31,7 +31,7 @@ export const cd = (command) => {
     }
     default: {
       try {
-        process.chdir(path.join(currentDir, featurePath));
+        process.chdir(resolve(currentDir, featurePath));
       } catch {
         console.log(
           consoleColors.red,

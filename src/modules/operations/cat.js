@@ -1,6 +1,6 @@
 import { consoleColors, checkFileAccess } from '../helpers.js';
 import { createReadStream } from 'fs';
-import path from 'path';
+import { resolve } from 'path';
 import { EOL } from 'os';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: cat path_to_file`;
@@ -11,9 +11,11 @@ export const cat = async (command) => {
     return;
   }
 
-  const pathToFile = path.join(process.cwd(), command[1]);
+  const pathToFile = resolve(process.cwd(), command[1]);
 
-  if (!(await checkFileAccess(pathToFile))) return;
+  const isFile = await checkFileAccess(pathToFile);
+
+  if (!isFile) return;
 
   const readStream = createReadStream(pathToFile);
 

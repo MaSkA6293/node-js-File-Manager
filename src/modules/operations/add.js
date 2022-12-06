@@ -1,6 +1,6 @@
 import { consoleColors } from '../helpers.js';
 import { writeFile } from 'fs/promises';
-import path from 'path';
+import { resolve } from 'path';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: add new_file_name`;
 
@@ -10,12 +10,11 @@ export const add = async (command) => {
     return;
   }
 
+  const [_, name] = command;
+
   try {
-    await writeFile(path.join(process.cwd(), command[1]), '');
-    console.log(
-      consoleColors.green,
-      `The file "${command[1]}" created successfully`
-    );
+    await writeFile(resolve(process.cwd(), name), '');
+    console.log(consoleColors.green, `The file "${name}" created successfully`);
   } catch (e) {
     console.log(consoleColors.red, `Operation failed`, e);
   }

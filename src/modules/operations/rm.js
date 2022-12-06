@@ -1,6 +1,6 @@
 import { consoleColors, checkFileAccess } from '../helpers.js';
 import { rm } from 'fs/promises';
-import path from 'path';
+import { resolve } from 'path';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: rm path_to_file`;
 
@@ -11,9 +11,11 @@ export const removeFile = async (command) => {
   }
   const [_, fileName] = command;
 
-  const pathToFile = path.join(process.cwd(), fileName);
+  const pathToFile = resolve(process.cwd(), fileName);
 
-  if (!(await checkFileAccess(pathToFile))) return;
+  const isFile = await checkFileAccess(pathToFile);
+
+  if (!isFile) return;
 
   try {
     await rm(pathToFile);
