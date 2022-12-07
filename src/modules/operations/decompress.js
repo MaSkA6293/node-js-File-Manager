@@ -34,8 +34,6 @@ export const decompress = async (command) => {
     return;
   }
 
-  console.log('ok');
-
   const readStream = createReadStream(pathToFile);
 
   const writeStream = createWriteStream(
