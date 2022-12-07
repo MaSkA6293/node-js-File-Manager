@@ -16,17 +16,26 @@ export const cat = async (command) => {
   const isFile = await checkFileAccess(pathToFile);
 
   if (!isFile) return;
-
-  const readStream = createReadStream(pathToFile);
-
-  readStream
-    .on('data', (chunk) => {
-      process.stdout.write(chunk);
-    })
-    .on('end', () => {
-      process.stdout.write(EOL);
-    })
-    .on('error', (e) => {
-      console.log('Operation failed', e);
+  try {
+    const prom = new Promise((res, rej) => {
+      const readStream = createReadStream(pathToFile);
+      let fileData = '';
+      readStream
+        .on('data', (chunk) => {
+          fileData += chunk;
+        })
+        .on('end', () => {
+          fileData += EOL;
+          console.log(fileData);
+          res();
+        })
+        .on('error', (e) => {
+          console.log('Operation failed', e);
+          rej();
+        });
     });
+    await prom;
+  } catch (e) {
+    console.log(e);
+  }
 };
