@@ -1,4 +1,8 @@
-import { consoleColors, checkFileAccess } from '../helpers.js';
+import {
+  consoleColors,
+  checkFileAccess,
+  checkFolderAccess,
+} from '../helpers.js';
 import { copyFile, constants } from 'fs/promises';
 import { resolve } from 'path';
 import { EOL } from 'os';
@@ -13,21 +17,19 @@ export const cp = async (command) => {
   const [_, fileName, to] = command;
 
   const pathToFile = resolve(process.cwd(), fileName);
-  const pathToCopy = resolve(process.cwd(), to);
+  const pathToCopyFolder = resolve(process.cwd(), to);
 
   const isFile = await checkFileAccess(pathToFile);
   if (!isFile) return;
 
+  const isFolderExists = await checkFolderAccess(to);
+  if (!isFolderExists) return;
+
+  const pathToNewFile = resolve(pathToCopyFolder, fileName);
+
   try {
-    await copyFile(pathToFile, pathToCopy, constants.COPYFILE_EXCL);
+    await copyFile(pathToFile, pathToNewFile);
   } catch (e) {
-    if (e && e.code === 'EEXIST') {
-      console.log(
-        consoleColors.red,
-        `Operation failed, file named ${to}, already exists ${EOL}`
-      );
-    } else {
-      console.log(consoleColors.red, 'Operation failed', e);
-    }
+    console.log(consoleColors.red, 'Operation failed', e);
   }
 };
