@@ -123,7 +123,7 @@ export const argumentsOsCommand = {
 };
 
 export const osCheckArgument = (argument) => {
-  if (argumentsOsCommand.hasOwnProperty(argument.slice(2))) {
+  if (argumentsOsCommand.hasOwnProperty(argument.slice(2).toLowerCase())) {
     return true;
   } else {
     console.log(
