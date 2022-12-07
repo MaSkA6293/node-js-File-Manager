@@ -6,7 +6,7 @@ import {
 } from '../helpers.js';
 import { resolve } from 'path';
 import { createReadStream, createWriteStream } from 'fs';
-import { createBrotliCompress } from 'zlib';
+import { createBrotliDecompress } from 'zlib';
 
 const invalidCommandMessage = `Error, invalid command. Please print command like: decompress path_to_file path_to_destination`;
 
@@ -40,7 +40,7 @@ export const decompress = async (command) => {
     resolve(pathToCopy, `${fileName.slice(0, -3)}`)
   );
 
-  const brotliAlgorithm = createBrotliCompress();
+  const brotliAlgorithm = createBrotliDecompress();
 
   const stream = readStream.pipe(brotliAlgorithm).pipe(writeStream);
 
