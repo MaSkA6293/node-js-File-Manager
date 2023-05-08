@@ -102,6 +102,8 @@ npm run start -- --username=your_username
   ```
   NB! After decompressing of previously compressed file result should not differ with originally compressed file
 
+# Result
+
 1. [Task link](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/file-manager/assignment.md)
 
 2. Done 7.12.2022 / deadline 20.12.2022
